@@ -4,12 +4,17 @@ import os
 
 @task(log_prints=True)
 def extract_next_chunk(file_path:str, chunk_size:int, header):
+
+    # check for the memory file if exists:
     chunks_loaded_txt = 'chunks_loaded.txt'
     chunks_loaded = set()
     if chunks_loaded_txt in os.listdir():
         with open(chunks_loaded_txt, 'r') as file:
             chunks_loaded = set(file.read().splitlines())
+
+    # pick the next chunk from the dataset:
     chunk_num = 1
+
     while True:
         if str(chunk_num) not in chunks_loaded:
             df = pd.read_csv(file_path, skiprows=(chunk_size*(chunk_num-1)), nrows=chunk_size)
