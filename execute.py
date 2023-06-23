@@ -12,7 +12,7 @@ with open('config/config.yaml', 'r') as file:
 def main():
     path = config['raw_path']
     chunk_size = config['chunk_size']
-    column_names = ['video_id','trending_date','title','channel_title','category_id','publish_time','tags','views','likes','dislikes','comment_count','thumbnail_link','comments_disabled','ratings_disabled','video_error_or_removed','description']
+    column_names = config['column_names']
 
     # etl process:
     raw_data = extract_next_chunk(path, chunk_size, column_names)
